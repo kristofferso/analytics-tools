@@ -6,7 +6,7 @@ export default function Submit() {
     <Page>
       <form
         name="submit-tool"
-        method="post"
+        method="POST"
         action="/tool/submitted"
         data-netlify="true"
         netlify-honeypot="trick"
@@ -26,6 +26,8 @@ export default function Submit() {
             label="Name of the tool"
             name="toolname"
           />
+          <input type="hidden" name="form-name" value="submit-tool" />
+
           <Input required type="text" label="Website URL" name="url" />
           <Input type="textarea" label="Comments or feedback" name="comment" />
           <input type="text" name="trick" className="hidden" />
