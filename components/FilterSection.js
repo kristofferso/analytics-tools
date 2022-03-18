@@ -100,7 +100,9 @@ const MultiFilterButtons = ({
         <button
           key={index}
           className={`btn btn-sm ${
-            selected ? "btn-primary" : "btn-ghost bg-gray-200"
+            selected
+              ? "btn-primary"
+              : "btn-ghost bg-purple-100 hover:bg-purple-200"
           } rounded-full`}
           onClick={() => {
             handleMultiFilter(dimension, feature);
@@ -131,7 +133,7 @@ const SingleFilterButtons = ({
           <button
             key={j}
             className={`btn btn-sm btn-ghost ${
-              selected ? "btn-active" : "bg-gray-200"
+              selected ? "btn-active" : "bg-purple-100 hover:bg-purple-200"
             } rounded-full`}
             onClick={() => {
               handleSingleFilter(dimension, feature);
@@ -174,7 +176,9 @@ const BooleanFilters = ({
                       <button
                         key={j}
                         className={`btn btn-sm btn-ghost ${
-                          selected ? "btn-active" : "bg-gray-200"
+                          selected
+                            ? "btn-active"
+                            : "bg-purple-100 hover:bg-purple-200"
                         } rounded-full`}
                         onClick={() => {
                           handleSingleFilter(dimension, feature);
@@ -218,7 +222,7 @@ const BooleanFilters = ({
                   className={`btn btn-sm ${
                     activeFilters[dimension]
                       ? "btn-primary"
-                      : "btn-ghost bg-gray-200"
+                      : "btn-ghost bg-purple-100 hover:bg-purple-200"
                   } rounded-full`}
                   onClick={() => {
                     handleSingleFilter(dimension, true);
