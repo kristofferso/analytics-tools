@@ -5,6 +5,7 @@ import Page from "./../components/Page";
 import { useState, useEffect } from "react";
 import FilterSection from "../components/FilterSection";
 import { reduceDimension } from "../utils/reduceDimension";
+import Link from "next/link";
 
 export default function Home({ tools }) {
   const [filterDimensions, setFilterDimensions] = useState({});
@@ -74,19 +75,14 @@ export default function Home({ tools }) {
   return (
     <Page>
       <Header />
-      <div className="">
-        <h1 className="text-5xl font-bold leading-[1.1]">
-          All analytics tools
-        </h1>
-        <h2 className="text-3xl font-medium mt-2">for apps and websites</h2>
-      </div>
-
+      <h1 className="text-5xl font-medium">All the analytics tools</h1>
       <FilterSection
         activeFilters={activeFilters}
         setActiveFilters={setActiveFilters}
         filterDimensions={filterDimensions}
         typeDimension={typeDimension}
       />
+
       <div className="flex flex-col gap-2">
         <div className="divider">
           <h3 className="text-lg min-w-max">
@@ -97,7 +93,13 @@ export default function Home({ tools }) {
               : "No tools match your criterias"}
           </h3>
         </div>
-        <div className="flex items-center justify-center grow">
+        <div className="alert bg-purple-200">
+          Too many tools and parameters? Check out the guide
+          <Link href="/guide">
+            <a className="btn btn-primary rounded-full">Go to guide →</a>
+          </Link>{" "}
+        </div>
+        <div className="flex items-center justify-center grow mt-3">
           {Object.keys(activeFilters).length > 0 && (
             <button
               className="btn btn-sm btn-outline rounded-full"

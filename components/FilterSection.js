@@ -122,9 +122,10 @@ const SingleFilterButtons = ({
   activeFilters,
   handleSingleFilter,
 }) => {
+  const values = ["simple", "medium", "advanced"];
   return (
     <div className="btn-group">
-      {dimObject.values.map((feature, j) => {
+      {values.map((feature, j) => {
         const selected = activeFilters[dimension]?.includes(feature);
         return (
           <button

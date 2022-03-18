@@ -1,9 +1,11 @@
 import TextLink from "../../components/elements/TextLink";
+import Header from "../../components/Header";
 import Page from "../../components/Page";
 
 export default function Submit() {
   return (
     <Page>
+      <Header />
       <form
         name="submit-tool"
         method="POST"

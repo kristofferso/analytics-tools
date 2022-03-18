@@ -2,18 +2,43 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <div className="flex items-center justify-between">
-      <a
-        href="https://tataki.no"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="self-start"
-      >
-        <div className="flex gap-4 items-center group">
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-1 items-start">
+          <Link href="/">
+            <a className="text-2xl font-bold leading-[1.1] hover:border-b-4 hover:-mb-1 border-gray-300">
+              Analytics.rip
+            </a>
+          </Link>
+          <h2 className="font-medium">
+            All analytics tools for apps and websites
+          </h2>
+        </div>
+
+        <Link href="/tool/submit">
+          <a className="btn btn-primary btn-outline rounded-full">
+            + Submit tool
+          </a>
+        </Link>
+      </div>
+      <div className="divider">
+        <a
+          href="https://tataki.no"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex gap-2 items-center group"
+        >
+          <p
+            className="font-medium min-w-max
+          "
+          >
+            made by
+          </p>
+
           <svg
             className="rounded fill-black group-hover:fill-primary-focus"
-            width="50"
-            height="50"
+            width="30"
+            height="30"
             viewBox="0 0 300 300"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,16 +49,11 @@ export default function Header() {
               fill="white"
             />
           </svg>
-          <p className="text-2xl font-bold italic group-hover:border-b-4 group-hover:-mb-1 border-gray-300">
+          <p className="text-xl font-bold italic group-hover:border-b-4 group-hover:-mb-1 border-gray-300">
             tataki
           </p>
-        </div>
-      </a>
-      <Link href="/tool/submit">
-        <a className="btn btn-primary btn-outline rounded-full">
-          + Submit tool
         </a>
-      </Link>
+      </div>
     </div>
   );
 }

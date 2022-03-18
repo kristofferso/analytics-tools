@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export default function ToolCard({ tool }) {
   const router = useRouter();
 
-  const urlName = tool.name?.replaceAll(" ", "-").toLowerCase();
+  const urlName = tool.name?.replace(/\s/g, "-").toLowerCase();
 
   return (
     <div
