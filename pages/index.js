@@ -76,7 +76,7 @@ export default function Home({ tools }) {
     <Page>
       <Header />
       <h1 className="text-5xl font-medium leading-[1.1] mb-4">
-        All the analytics tools
+        All analytics tools
       </h1>
       <FilterSection
         activeFilters={activeFilters}

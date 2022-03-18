@@ -1,8 +1,12 @@
+import Head from "next/head";
 import TextLink from "./elements/TextLink";
 
 export default function Page({ children }) {
   return (
     <>
+      <Head>
+        <title>Analytics.rip</title>
+      </Head>
       <div className="max-w-4xl mx-auto px-4 pb-12 pt-8 flex flex-col gap-6">
         {children}
       </div>
