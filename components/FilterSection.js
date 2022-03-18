@@ -262,7 +262,7 @@ const TypeFilter = ({
         return (
           <button
             key={j}
-            className={`card p-4 items-start justify-between rounded-2xl h-40 sm:h-32 w-40 grow border border-base-content shadow group hover:border-primary-focus ${
+            className={`card p-4 items-start justify-between rounded-2xl h-36 sm:h-40 sm:h-32 w-40 grow border border-base-content shadow group hover:border-primary-focus ${
               selected ? "border-primary-focus bg-purple-100" : ""
             }`}
             onClick={() => {

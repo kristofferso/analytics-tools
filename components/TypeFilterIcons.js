@@ -3,7 +3,7 @@ export default function TypeFilterIcons({ feature, selected }) {
     <div className="self-end">
       {feature === "web analytics" && (
         <svg
-          className="h-16 w-[7rem]"
+          className="h-14 w-[5.5rem] sm:h-16 sm:w-[7rem]"
           width="42"
           height="28"
           viewBox="0 0 42 28"
@@ -120,7 +120,7 @@ export default function TypeFilterIcons({ feature, selected }) {
       )}
       {feature === "all-round analytics" && (
         <svg
-          className="h-16 w-24"
+          className="h-14 w-20 sm:h-16 sm:w-24"
           width="30"
           height="23"
           viewBox="0 0 30 23"
@@ -176,7 +176,7 @@ export default function TypeFilterIcons({ feature, selected }) {
       )}
       {feature === "product analytics" && (
         <svg
-          className="h-16 w-32"
+          className="h-12 w-24 sm:h-16 sm:w-32"
           width="52"
           height="23"
           viewBox="0 0 52 23"

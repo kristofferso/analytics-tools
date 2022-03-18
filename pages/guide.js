@@ -10,7 +10,9 @@ export default function Guide({ tools }) {
       <Header />
       <TextLink href="/">← Back to all tools</TextLink>
       <div className="flex flex-col gap-6">
-        <h1 className="text-5xl font-medium">Analytics tool guide</h1>
+        <h1 className="text-5xl font-medium leading-[1.1]">
+          Analytics tool guide
+        </h1>
 
         <GuideSection
           tools={tools}
