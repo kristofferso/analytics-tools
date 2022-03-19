@@ -3,14 +3,14 @@ import Link from "next/link";
 export default function Header() {
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-3">
         <div className="flex flex-col gap-1 items-start">
           <Link href="/">
             <a className="text-2xl font-bold leading-[1.1] hover:border-b-4 hover:-mb-1 border-gray-300">
               Analytics.rip
             </a>
           </Link>
-          <h2 className="font-medium">
+          <h2 className="font-medium min-w-min">
             All analytics tools for apps and websites
           </h2>
         </div>
@@ -26,7 +26,7 @@ export default function Header() {
           href="https://tataki.no"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex gap-2 items-center group"
+          className="flex gap-2 items-center group min-w-max"
         >
           <p
             className="font-medium min-w-max
