@@ -41,11 +41,11 @@ export default function Submit() {
             </tr>
           </tbody>
         </table>
-        <p className="mt-4">
-          We use our custom build analytics tool that we might share with the
-          rest of the world in the future ;)
-        </p>
       </div>
+      <p className="mt-4">
+        We use our custom build analytics tool that we might share with the rest
+        of the world in the future ;)
+      </p>
     </Page>
   );
 }

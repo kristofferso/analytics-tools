@@ -7,6 +7,8 @@ export async function middleware(req, ev) {
   const { browser, os, device } = req.ua;
   const { href, pathname, search, host } = url;
 
+  console.log("pageview", page.name, req.method);
+
   if (page.name && page.name.split("/")[1] !== "api" && req.method === "GET") {
     const supabase = getSupabaseServiceInstance();
 
