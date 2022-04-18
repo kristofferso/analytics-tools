@@ -1,6 +1,6 @@
 // Identify function with constant ID generated server side. Same every 24 hours.
 import { createHmac } from "crypto";
-import getSalt from "../../utils/getsalt";
+import getSalt from "./../../utils/getsalt";
 
 export default async function handler(req, res) {
   const ip = req.socket.remoteAddress;
