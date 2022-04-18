@@ -7,7 +7,7 @@ export async function middleware(req, ev) {
   const { browser, os, device } = req.ua;
   const { href, pathname, search, host } = url;
 
-  if (page.name && page.name.split("/")[1] !== "api") {
+  if (page.name && page.name.split("/")[1] !== "api" && req.method === "GET") {
     const supabase = getSupabaseServiceInstance();
 
     // Check for cookie

@@ -95,11 +95,11 @@ const GuideSection = ({
         <p className="">{description}</p>
       </div>
       {recommendedTool && (
-        <div className="relative">
+        <div className="flex relative">
           <div className="bg-purple-200 border-primary border rounded-full px-4 py-2 rotate-2 self-center font-medium text-lg absolute -top-6 right-20 z-10">
             Recommended
           </div>
-          <ToolCard tool={recommendedTool} className="w-[100%]" />
+          <ToolCard tool={recommendedTool} className="flex-grow" />
         </div>
       )}
       <button

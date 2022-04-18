@@ -5,11 +5,13 @@ import { capitalize } from "../../utils/capitalize";
 import Image from "next/image";
 import Button from "../../components/elements/Button";
 import { useState } from "react";
+import Header from "../../components/Header";
 
 export default function Name({ tool }) {
   const [screenshot, showScreenshot] = useState(false);
   return (
     <Page>
+      <Header />
       <TextLink href="/">← All tools</TextLink>
       <h1 className="text-5xl font-bold leading-tight break-words">
         {tool.name}

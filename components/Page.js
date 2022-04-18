@@ -11,10 +11,11 @@ export default function Page({ children }) {
         {children}
       </div>
       <footer className="footer footer-center py-16 px-10 bg-base-200 text-base-content rounded mt-12 border-t">
-        <div className="grid grid-flow-col gap-4">
+        <div className="flex flex-row justify-center gap-4 flex-wrap">
           <TextLink href="/">All analytics tools</TextLink>
           <TextLink href="/guide">Tool guide</TextLink>
           <TextLink href="/tool/submit">Submit tool</TextLink>
+          <TextLink href="/cookies">Cookie policy</TextLink>
         </div>
 
         <div>
