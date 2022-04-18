@@ -1,4 +1,6 @@
 import Link from "next/link";
+import trackEvent from "../utils/trackEvent";
+import Button from "./elements/Button";
 
 export default function Header() {
   return (
@@ -15,11 +17,9 @@ export default function Header() {
           </h2>
         </div>
 
-        <Link href="/tool/submit">
-          <a className="btn btn-primary btn-outline rounded-full">
-            + Submit tool
-          </a>
-        </Link>
+        <Button href="/tool/submit" type="primaryOutline">
+          + Submit tool
+        </Button>
       </div>
       <div className="divider">
         <a
@@ -27,6 +27,12 @@ export default function Header() {
           target="_blank"
           rel="noopener noreferrer"
           className="flex gap-2 items-center group min-w-max"
+          onClick={() => {
+            trackEvent({
+              name: "link tataki press",
+              props: { position: "header" },
+            });
+          }}
         >
           <p
             className="font-medium min-w-max

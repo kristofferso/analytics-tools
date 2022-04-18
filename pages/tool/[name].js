@@ -3,13 +3,17 @@ import Page from "../../components/Page";
 import { supabase } from "../../utils/supabase";
 import { capitalize } from "../../utils/capitalize";
 import Image from "next/image";
+import Button from "../../components/elements/Button";
+import { useState } from "react";
 
 export default function Name({ tool }) {
-  console.log(tool);
+  const [screenshot, showScreenshot] = useState(false);
   return (
     <Page>
       <TextLink href="/">← All tools</TextLink>
-      <h1 className="text-5xl font-bold leading-tight">{tool.name}</h1>
+      <h1 className="text-5xl font-bold leading-tight break-words">
+        {tool.name}
+      </h1>
       <div>
         <div className="card lg:card-side bg-base-100 shadow-xl">
           <div
@@ -38,9 +42,6 @@ export default function Name({ tool }) {
                 {tool.open_source && (
                   <p className="badge badge-secondary badge-lg">Open source</p>
                 )}
-                {tool.privacy_friendly && (
-                  <p className="badge badge-secondary badge-lg">Open source</p>
-                )}
                 {tool.cookie_based && (
                   <p className="badge badge-accent badge-lg">Cookie based</p>
                 )}
@@ -62,7 +63,7 @@ export default function Name({ tool }) {
               </div>
             </FeatureSection>
             <FeatureSection title="Hosting">
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 {(tool.hosting === "both" || tool.hosting === "cloud") && (
                   <div className="badge badge-lg capitalize">cloud hosted</div>
                 )}
@@ -71,6 +72,40 @@ export default function Name({ tool }) {
                 )}
               </div>
             </FeatureSection>
+            {tool.screenshot_url && (
+              <FeatureSection title="Screenshot">
+                <div
+                  className="relative h-40 w-64 cursor-pointer max-w-full bg-gray-100 rounded-xl"
+                  onClick={() => showScreenshot(true)}
+                >
+                  <Image
+                    src={tool.screenshot_url}
+                    layout="fill"
+                    objectFit="contain"
+                    alt={`${tool.name} screenshot`}
+                  />
+                </div>
+              </FeatureSection>
+            )}
+            {tool.demo_link && (
+              <FeatureSection title="Demo">
+                {tool.name} has a demo version
+                <Button
+                  external
+                  className="self-start"
+                  href={tool.demo_link}
+                  eventData={{
+                    name: "button try demo",
+                    props: { tool: tool.name, url: tool.url },
+                  }}
+                  type="secondaryGray"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Try demo ↗︎
+                </Button>
+              </FeatureSection>
+            )}
             <FeatureSection title="Pricing">
               <p>
                 Pricing tiers are differentiated by {tool.pricing_tier_dims}.
@@ -87,18 +122,39 @@ export default function Name({ tool }) {
               )}
             </FeatureSection>
             <div className="card-actions justify-end">
-              <a
+              <Button
+                external
                 href={tool.url}
+                eventData={{
+                  name: "button get tool",
+                  props: { tool: tool.name, url: tool.url },
+                  position: "tool page",
+                }}
+                type="primarySquare"
                 target="_blank"
-                className="btn btn-primary"
                 rel="noreferrer"
               >
                 Get it ↗︎
-              </a>
+              </Button>
             </div>
           </div>
         </div>
       </div>
+      {screenshot && (
+        <div
+          className="bg-black bg-opacity-20 fixed h-full w-full top-0 left-0 p-4 cursor-pointer"
+          onClick={() => showScreenshot(false)}
+        >
+          <div className="relative w-full h-full max-w-4xl mx-auto">
+            <Image
+              src={tool.screenshot_url}
+              layout="fill"
+              objectFit="contain"
+              alt={`${tool.name} screenshot`}
+            />
+          </div>
+        </div>
+      )}
     </Page>
   );
 }

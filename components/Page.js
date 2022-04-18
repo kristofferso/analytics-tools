@@ -20,7 +20,14 @@ export default function Page({ children }) {
         <div>
           <p className="text-base">
             analytics.rip – an app by{" "}
-            <TextLink href="https://tataki.no" external={true}>
+            <TextLink
+              href="https://tataki.no"
+              external={true}
+              eventData={{
+                name: "link tataki press",
+                props: { position: "footer" },
+              }}
+            >
               Tataki
             </TextLink>
           </p>

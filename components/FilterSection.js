@@ -1,3 +1,4 @@
+import trackEvent from "../utils/trackEvent";
 import TypeFilterIcons from "./TypeFilterIcons";
 export default function FilterSection({
   activeFilters,
@@ -15,9 +16,17 @@ export default function FilterSection({
         ],
       });
     } else {
-      setActiveFilters({
+      const newActiveFilters = {
         ...activeFilters,
         [dimension]: [...(activeFilters[dimension] || []), selectedValue],
+      };
+      setActiveFilters(newActiveFilters);
+      trackEvent({
+        name: `filter ${dimension}`,
+        props: {
+          value: selectedValue,
+          allActiveFilters: newActiveFilters,
+        },
       });
     }
   };
@@ -28,7 +37,15 @@ export default function FilterSection({
       delete newActiveFilters[dimension];
       setActiveFilters(newActiveFilters);
     } else {
-      setActiveFilters({ ...activeFilters, [dimension]: selectedValue });
+      const newActiveFilters = { ...activeFilters, [dimension]: selectedValue };
+      setActiveFilters(newActiveFilters);
+      trackEvent({
+        name: `filter ${dimension}`,
+        props: {
+          value: selectedValue,
+          allActiveFilters: newActiveFilters,
+        },
+      });
     }
   };
 

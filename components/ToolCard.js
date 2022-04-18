@@ -2,8 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Button from "./elements/Button";
 
-export default function ToolCard({ tool }) {
+export default function ToolCard({ tool, className }) {
   const router = useRouter();
 
   const urlName = tool.name?.replace(/\s/g, "-").toLowerCase();
@@ -13,7 +14,7 @@ export default function ToolCard({ tool }) {
       onClick={() => {
         router.push(`tool/${urlName}`);
       }}
-      className={`card w-72 grow bg-base-200 shadow-2xl shadow-${tool.color_tint}-200 border-${tool.color_tint}-200 group cursor-pointer border hover:bg-${tool.color_tint}-50`}
+      className={`card w-72 grow bg-base-200 shadow-2xl shadow-${tool.color_tint}-200 border-${tool.color_tint}-200 group cursor-pointer border hover:bg-${tool.color_tint}-50 ${className}`}
     >
       <div className="card-body max-w-full">
         <div className="flex justify-between items-center">
@@ -49,28 +50,36 @@ export default function ToolCard({ tool }) {
         </p>
 
         <div className="card-actions justify-end mt-6">
-          <Link href={`/tool/${urlName}`}>
-            <a
-              className="btn btn-sm"
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              Read more
-            </a>
-          </Link>
+          <Button
+            href={`/tool/${urlName}`}
+            type="secondaryGray"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            Read more
+          </Button>
 
-          <a
+          <Button
+            external
             onClick={(e) => {
               e.stopPropagation();
             }}
             href={tool.url}
+            eventData={{
+              name: "button get tool",
+              props: {
+                tool: tool.name,
+                url: tool.url,
+                location: "overview card",
+              },
+            }}
+            type="secondaryOutline"
             target="_blank"
-            className="btn btn-sm btn-outline"
             rel="noreferrer"
           >
             Get it ↗︎
-          </a>
+          </Button>
         </div>
       </div>
     </div>
