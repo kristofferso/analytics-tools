@@ -8,12 +8,13 @@ export default function Submit() {
       <Header />
       <form
         name="submit-tool"
+        data-netlify="true"
         method="POST"
         action="/tool/submitted"
-        data-netlify="true"
         netlify-honeypot="trick"
         className="flex flex-col gap-2"
       >
+        <input type="hidden" name="form-name" value="submit-tool" />
         <TextLink href="/">← Back to overview</TextLink>
         <h1 className="text-4xl font-bold mt-4">Submit tool</h1>
         <p className="">
@@ -28,7 +29,6 @@ export default function Submit() {
             label="Name of the tool"
             name="toolname"
           />
-          <input type="hidden" name="form-name" value="submit-tool" />
 
           <Input required type="text" label="Website URL" name="url" />
           <Input type="textarea" label="Comments or feedback" name="comment" />
