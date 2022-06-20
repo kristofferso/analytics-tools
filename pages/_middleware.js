@@ -3,11 +3,11 @@ import { getSupabaseServiceInstance } from "../utils/supabase";
 import { v4 as uuid } from "uuid";
 
 export async function middleware(req, ev) {
-  const { page, nextUrl: url, geo, referrer } = req;
+  const { page, nextUrl: url, geo, referrer, method } = req;
   const { browser, os, device } = req.ua;
   const { href, pathname, search, host } = url;
 
-  console.log("pageview", page.name, req.method);
+  console.log("pageview", { page, method });
 
   if (page.name && page.name.split("/")[1] !== "api" && req.method === "GET") {
     const supabase = getSupabaseServiceInstance();

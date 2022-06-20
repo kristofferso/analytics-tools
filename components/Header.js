@@ -7,7 +7,7 @@ export default function Header() {
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center gap-3">
         <div className="flex flex-col gap-1 items-start">
-          <Link href="/">
+          <Link href="/" prefetch={false}>
             <a className="text-2xl font-bold leading-[1.1] hover:border-b-4 hover:-mb-1 border-gray-300">
               Analytics.rip
             </a>

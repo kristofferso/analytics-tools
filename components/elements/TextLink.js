@@ -30,7 +30,7 @@ export default function TextLink({
     );
   }
   return (
-    <Link href={href}>
+    <Link href={href} prefetch={false}>
       <a className={styles}>{children}</a>
     </Link>
   );

@@ -75,7 +75,7 @@ export default function Home({ tools }) {
   return (
     <Page>
       <Header />
-      <h1 className="text-5xl font-medium leading-[1.1] mb-4">
+      <h1 className="text-3xl sm:text-4xl font-medium leading-[1.1] sm:mb-4">
         All analytics tools
       </h1>
       <FilterSection
@@ -97,7 +97,7 @@ export default function Home({ tools }) {
         </div>
         <div className="alert bg-purple-200">
           Too many tools and parameters? Check out the guide
-          <Link href="/guide">
+          <Link href="/guide" prefetch={false}>
             <a className="btn btn-primary rounded-full">Go to guide →</a>
           </Link>{" "}
         </div>

@@ -37,7 +37,7 @@ export default function Button({
     );
   }
   return (
-    <Link href={href}>
+    <Link href={href} prefetch={false}>
       <a
         className={`btn ${style[type]} ${className}`}
         onClick={(e) => {
