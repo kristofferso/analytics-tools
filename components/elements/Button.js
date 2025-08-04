@@ -37,19 +37,19 @@ export default function Button({
     );
   }
   return (
-    <Link href={href} prefetch={false}>
-      <a
-        className={`btn ${style[type]} ${className}`}
-        onClick={(e) => {
-          if (eventData) {
-            trackEvent(eventData);
-          }
-          if (onClick) onClick(e);
-        }}
-        {...props}
-      >
-        {children}
-      </a>
+    <Link 
+      href={href} 
+      prefetch={false}
+      className={`btn ${style[type]} ${className}`}
+      onClick={(e) => {
+        if (eventData) {
+          trackEvent(eventData);
+        }
+        if (onClick) onClick(e);
+      }}
+      {...props}
+    >
+      {children}
     </Link>
   );
 }

@@ -97,8 +97,8 @@ export default function Home({ tools }) {
         </div>
         <div className="alert bg-purple-200">
           Too many tools and parameters? Check out the guide
-          <Link href="/guide" prefetch={false}>
-            <a className="btn btn-primary rounded-full">Go to guide →</a>
+          <Link href="/guide" prefetch={false} className="btn btn-primary rounded-full">
+            Go to guide →
           </Link>{" "}
         </div>
         <div className="flex items-center justify-center grow mt-3">

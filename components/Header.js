@@ -7,10 +7,8 @@ export default function Header() {
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center gap-3">
         <div className="flex flex-col gap-1 items-start">
-          <Link href="/" prefetch={false}>
-            <a className="text-2xl font-bold leading-[1.1] hover:border-b-4 hover:-mb-1 border-gray-300">
-              Analytics.rip
-            </a>
+          <Link href="/" prefetch={false} className="text-2xl font-bold leading-[1.1] hover:border-b-4 hover:-mb-1 border-gray-300">
+            Analytics.rip
           </Link>
           <h2 className="font-medium min-w-min">
             All analytics tools for apps and websites
