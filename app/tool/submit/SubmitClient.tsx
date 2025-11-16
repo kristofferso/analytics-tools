@@ -80,7 +80,6 @@ export default function SubmitClient() {
             <Input
               id="url"
               name="url"
-              type="url"
               placeholder="https://example.com"
               required
               disabled={isPending}
