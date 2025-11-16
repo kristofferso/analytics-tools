@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { geolocation } from "@vercel/functions";
 import { getSupabaseServiceInstance } from "./utils/supabase";
 import { randomUUID } from "crypto";
 
@@ -21,7 +22,8 @@ export async function proxy(request: NextRequest) {
     const userHashFromCookies = request.cookies.get(cookieName)?.value;
     const userHash = userHashFromCookies || randomUUID();
 
-    const geo = request.geo || {};
+    // Get geolocation data using @vercel/functions
+    const geo = geolocation(request) || {};
     const userAgent = request.headers.get("user-agent") || "";
     const referrer = request.headers.get("referer") || "";
 

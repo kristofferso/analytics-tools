@@ -160,8 +160,7 @@ export default function ToolClient({ tool }: ToolClientProps) {
                 href={tool.url}
                 eventData={{
                   name: "button get tool",
-                  props: { tool: tool.name, url: tool.url },
-                  position: "tool page",
+                  props: { tool: tool.name, url: tool.url, position: "tool page" },
                 }}
                 type="primarySquare"
                 target="_blank"
