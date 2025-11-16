@@ -13,6 +13,9 @@ module.exports = {
   ],
   theme: {
   	extend: {
+		screens: {
+			'xs': '360px',
+		},
   		fontSize: {
   			'4xl': '2.5rem',
   			'5xl': '3.5rem'

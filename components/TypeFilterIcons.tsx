@@ -5,12 +5,10 @@ interface TypeFilterIconsProps {
 
 export default function TypeFilterIcons({ feature, selected }: TypeFilterIconsProps) {
   return (
-    <div className="self-end">
+    <div className="self-end h-auto w-28 max-sm:w-24">
       {feature === "web analytics" && (
         <svg
-          className="h-14 w-[5.5rem] sm:h-16 sm:w-[7rem]"
-          width="42"
-          height="28"
+          className="h-full w-full"
           viewBox="0 0 42 28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -125,9 +123,7 @@ export default function TypeFilterIcons({ feature, selected }: TypeFilterIconsPr
       )}
       {feature === "all-round analytics" && (
         <svg
-          className="h-14 w-20 sm:h-16 sm:w-24"
-          width="30"
-          height="23"
+          className="h-full w-full"
           viewBox="0 0 30 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -181,9 +177,7 @@ export default function TypeFilterIcons({ feature, selected }: TypeFilterIconsPr
       )}
       {feature === "product analytics" && (
         <svg
-          className="h-12 w-24 sm:h-16 sm:w-32"
-          width="52"
-          height="23"
+          className="h-full w-full"
           viewBox="0 0 52 23"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

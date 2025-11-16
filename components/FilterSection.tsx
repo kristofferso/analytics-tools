@@ -303,15 +303,14 @@ const TypeFilter = ({
   handleSingleFilter,
 }: TypeFilterProps) => {
   return (
-    <div className="flex gap-4 w-full flex-wrap items-start mb-2">
+    <div className="grid grid-cols-3 gap-4 w-full max-md:grid-cols-2 max-xs:grid-cols-1">
       {dimObject.values.map((feature, j) => {
         const selected = activeFilters[dimension] === feature;
         return (
-          <Button
+          <button
             key={j}
-            variant="outline"
             className={cn(
-              "!p-6 !flex !flex-col !items-start !justify-between rounded-2xl h-44 sm:h-48 w-48 grow border shadow group hover:border-primary [&_svg]:!size-auto",
+              "p-6 flex flex-col items-start justify-between rounded-2xl h-44 border shadow group hover:border-primary [&_svg]:!size-auto",
               selected && "border-primary bg-purple-100"
             )}
             onClick={() => {
@@ -322,7 +321,7 @@ const TypeFilter = ({
               {feature as string}
             </p>
             <TypeFilterIcons feature={feature as string} selected={selected} />
-          </Button>
+          </button>
         );
       })}
     </div>
