@@ -10,7 +10,7 @@ interface PageProps {
 export default function Page({ children }: PageProps) {
   return (
     <>
-      <div className="max-w-4xl mx-auto px-4 pb-12 pt-8 flex flex-col gap-6">
+      <div className="max-w-6xl mx-auto px-4 pb-12 pt-8 flex flex-col gap-6">
         {children}
       </div>
       <footer className="footer footer-center py-16 px-10 bg-base-200 text-base-content rounded mt-12 border-t">
