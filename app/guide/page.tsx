@@ -5,9 +5,15 @@ import ToolCard from "../../components/ToolCard";
 import GuideClient from "./GuideClient";
 
 async function getTools() {
-  const { data: tools } = await supabase.from("tools").select("*");
+  const { data: tools } = await supabase
+    .from("tools")
+    .select("*")
+    .order("name", { ascending: true });
   return tools || [];
 }
+
+// Cache guide page for 1 hour (3600 seconds)
+export const revalidate = 3600;
 
 export default async function Guide() {
   const tools = await getTools();

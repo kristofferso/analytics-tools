@@ -1,6 +1,7 @@
 "use client";
 
 import TextLink from "./elements/TextLink";
+import NewsletterSignup from "./NewsletterSignup";
 
 interface PageProps {
   children: React.ReactNode;
@@ -13,6 +14,9 @@ export default function Page({ children }: PageProps) {
         {children}
       </div>
       <footer className="footer footer-center py-16 px-10 bg-base-200 text-base-content rounded mt-12 border-t">
+        <div className="w-full max-w-2xl">
+          <NewsletterSignup variant="inline" className="mb-8" />
+        </div>
         <div className="flex flex-row justify-center gap-4 flex-wrap">
           <TextLink href="/">All analytics tools</TextLink>
           <TextLink href="/guide">Tool guide</TextLink>
