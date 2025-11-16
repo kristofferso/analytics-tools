@@ -2,6 +2,9 @@
 
 import trackEvent from "../utils/trackEvent";
 import TypeFilterIcons from "./TypeFilterIcons";
+import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { cn } from "@/lib/utils";
 
 interface FilterDimensions {
   [key: string]: {
@@ -144,22 +147,21 @@ const MultiFilterButtons = ({
     {dimObject.values.map((feature, index) => {
       const selected = Array.isArray(activeFilters[dimension]) && (activeFilters[dimension] as string[]).includes(feature as string);
       return (
-        <button
+        <Button
           key={index}
-          className={`btn btn-sm ${
-            selected
-              ? "btn-primary"
-              : "btn-ghost bg-purple-100 hover:bg-purple-200"
-          } rounded-full`}
+          variant={selected ? "default" : "outline"}
+          size="lg"
+          className={cn(
+            "rounded-full",
+            !selected && "bg-purple-100 hover:bg-purple-200"
+          )}
           onClick={() => {
             handleMultiFilter(dimension, feature as string);
           }}
         >
-          <p>
-            {feature}
-            {selected && <span className="ml-3 mb-3">×</span>}
-          </p>
-        </button>
+          {feature}
+          {selected && <span className="ml-2">×</span>}
+        </Button>
       );
     })}
   </>
@@ -180,27 +182,28 @@ const SingleFilterButtons = ({
 }: SingleFilterButtonsProps) => {
   const values = ["simple", "medium", "advanced"];
   return (
-    <div className="btn-group">
+    <ButtonGroup>
       {values.map((feature, j) => {
         const selected = activeFilters[dimension] === feature;
         return (
-          <button
+          <Button
             key={j}
-            className={`btn btn-sm btn-ghost ${
-              selected ? "btn-active" : "bg-purple-100 hover:bg-purple-200"
-            } rounded-full`}
+            variant={selected ? "default" : "outline"}
+            size="lg"
+            className={cn(
+              "rounded-full",
+              !selected && "bg-purple-100 hover:bg-purple-200"
+            )}
             onClick={() => {
               handleSingleFilter(dimension, feature);
             }}
           >
-            <p>
-              {feature}
-              {selected && <span className="ml-3 mb-3">×</span>}
-            </p>
-          </button>
+            {feature}
+            {selected && <span className="ml-2">×</span>}
+          </Button>
         );
       })}
-    </div>
+    </ButtonGroup>
   );
 };
 
@@ -216,7 +219,7 @@ const BooleanFilters = ({
   handleSingleFilter,
 }: BooleanFiltersProps) => {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex gap-2 flex-wrap items-center">
       <h3 className="text-xl font-medium">and it is</h3>
       {Object.keys(filterDimensions)
         .filter(
@@ -229,82 +232,55 @@ const BooleanFilters = ({
           return (
             <div key={i}>
               {dimObject.type === "toggle_values" && (
-                <div className="btn-group">
+                <ButtonGroup>
                   {dimObject.values.map((feature, j) => {
                     const selected = activeFilters[dimension] === feature;
+                    const label =
+                      dimension === "cookie_based"
+                        ? feature
+                          ? "Cookie based"
+                          : "Cookieless"
+                        : dimension === "hosting"
+                        ? feature === "both"
+                          ? "both"
+                          : `${feature} hosted`
+                        : String(feature);
                     return (
-                      <button
+                      <Button
                         key={j}
-                        className={`btn btn-sm btn-ghost ${
-                          selected
-                            ? "btn-active"
-                            : "bg-purple-100 hover:bg-purple-200"
-                        } rounded-full`}
+                        variant={selected ? "default" : "outline"}
+                        size="lg"
+                        className={cn(
+                          "rounded-full",
+                          !selected && "bg-purple-100 hover:bg-purple-200"
+                        )}
                         onClick={() => {
                           handleSingleFilter(dimension, feature as string | boolean);
                         }}
                       >
-                        {dimension === "cookie_based" &&
-                          (feature ? (
-                            <p>
-                              Cookie based
-                              {activeFilters[dimension] === feature && (
-                                <span className="ml-3 mb-3">×</span>
-                              )}
-                            </p>
-                          ) : (
-                            <p>
-                              Cookieless
-                              {activeFilters[dimension] === feature && (
-                                <span className="ml-3 mb-3">×</span>
-                              )}
-                            </p>
-                          ))}
-                        {dimension === "hosting" &&
-                          (feature === "both" ? (
-                            <p>
-                              {feature}
-                              {selected && <span className="ml-3 mb-3">×</span>}
-                            </p>
-                          ) : (
-                            <p>
-                              {feature} hosted
-                              {selected && <span className="ml-3 mb-3">×</span>}
-                            </p>
-                          ))}
-                      </button>
+                        {label}
+                        {selected && <span className="ml-2">×</span>}
+                      </Button>
                     );
                   })}
-                </div>
+                </ButtonGroup>
               )}
               {dimObject.type === "toggle_boolean" && (
-                <button
-                  className={`btn btn-sm ${
-                    activeFilters[dimension]
-                      ? "btn-primary"
-                      : "btn-ghost bg-purple-100 hover:bg-purple-200"
-                  } rounded-full`}
+                <Button
+                  variant={activeFilters[dimension] ? "default" : "outline"}
+                  size="lg"
+                  className={cn(
+                    "rounded-full",
+                    !activeFilters[dimension] && "bg-purple-100 hover:bg-purple-200"
+                  )}
                   onClick={() => {
                     handleSingleFilter(dimension, true);
                   }}
                 >
-                  {dimension === "privacy_friendly" && (
-                    <p>
-                      Privacy friendly
-                      {activeFilters[dimension] && (
-                        <span className="ml-3 mb-3">×</span>
-                      )}
-                    </p>
-                  )}
-                  {dimension === "open_source" && (
-                    <p>
-                      Open source
-                      {activeFilters[dimension] && (
-                        <span className="ml-3 mb-3">×</span>
-                      )}
-                    </p>
-                  )}
-                </button>
+                  {dimension === "privacy_friendly" && "Privacy friendly"}
+                  {dimension === "open_source" && "Open source"}
+                  {activeFilters[dimension] && <span className="ml-2">×</span>}
+                </Button>
               )}
             </div>
           );
@@ -331,20 +307,22 @@ const TypeFilter = ({
       {dimObject.values.map((feature, j) => {
         const selected = activeFilters[dimension] === feature;
         return (
-          <button
+          <Button
             key={j}
-            className={`card p-4 items-start justify-between rounded-2xl h-36 sm:h-40 w-40 grow border border-base-content shadow group hover:border-primary-focus ${
-              selected ? "border-primary-focus bg-purple-100" : ""
-            }`}
+            variant="outline"
+            className={cn(
+              "!p-6 !flex !flex-col !items-start !justify-between rounded-2xl h-44 sm:h-48 w-48 grow border shadow group hover:border-primary [&_svg]:!size-auto",
+              selected && "border-primary bg-purple-100"
+            )}
             onClick={() => {
               handleSingleFilter(dimension, feature as string);
             }}
           >
-            <p className="text-left text-lg font-medium capitalize group-hover:text-primary-focus z-10">
+            <p className="text-left text-lg font-medium capitalize group-hover:text-primary z-10">
               {feature as string}
             </p>
             <TypeFilterIcons feature={feature as string} selected={selected} />
-          </button>
+          </Button>
         );
       })}
     </div>

@@ -31,7 +31,7 @@ export default function ToolCard({ tool, className = "" }: ToolCardProps) {
       onClick={() => {
         router.push(`/tool/${urlName}`);
       }}
-      className={`card w-72 grow bg-base-200 shadow-2xl shadow-${tool.color_tint}-200 border-${tool.color_tint}-200 group cursor-pointer border hover:bg-${tool.color_tint}-50 ${className}`}
+      className={`card w-72 grow bg-gray-50 shadow-2xl shadow-${tool.color_tint}-200 border-${tool.color_tint}-200 group cursor-pointer border hover:bg-${tool.color_tint}-50 ${className}`}
     >
       <div className="card-body max-w-full">
         <div className="flex justify-between items-center">
