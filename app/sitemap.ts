@@ -1,25 +1,15 @@
 import { MetadataRoute } from "next";
-import { supabase } from "../utils/supabase";
+import { getAllToolSlugs } from "../data/toolsData";
 
-// Cache sitemap for 24 hours (86400 seconds)
-export const revalidate = 86400;
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://analytics.rip";
 
-  // Get all tools
-  const { data: tools } = await supabase
-    .from("tools")
-    .select("name")
-    .order("name", { ascending: true });
-
-  const toolUrls =
-    tools?.map((tool) => ({
-      url: `${baseUrl}/tool/${tool.name.toLowerCase().replace(/\s/g, "-")}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })) || [];
+  const toolUrls = getAllToolSlugs().map((slug) => ({
+    url: `${baseUrl}/tool/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
 
   return [
     {

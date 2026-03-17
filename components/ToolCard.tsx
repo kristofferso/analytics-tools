@@ -4,17 +4,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Button from "./elements/Button";
-
-interface Tool {
-  name: string;
-  color_tint: string;
-  logo_url: string;
-  privacy_friendly: boolean;
-  open_source: boolean;
-  analysis_level: string;
-  price_starting: number;
-  url: string;
-}
+import type { Tool } from "../types/tool";
 
 interface ToolCardProps {
   tool: Tool;

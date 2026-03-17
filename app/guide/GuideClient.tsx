@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import ToolCard from "../../components/ToolCard";
-
-interface Tool {
-  name: string;
-  type: string;
-  privacy_friendly: boolean;
-  cookie_based: boolean;
-  analysis_level: string;
-  hosting: string;
-}
+import type { Tool } from "../../types/tool";
 
 interface GuideClientProps {
   tools: Tool[];
@@ -47,7 +39,7 @@ const GuideSection = ({
           <div className="bg-purple-200 border-primary border rounded-full px-4 py-2 rotate-2 self-center font-medium text-lg absolute -top-6 right-20 z-10">
             Recommended
           </div>
-          <ToolCard tool={recommendedTool as any} className="flex-grow" />
+          <ToolCard tool={recommendedTool} className="flex-grow" />
         </div>
       )}
       <button
@@ -62,7 +54,7 @@ const GuideSection = ({
             .filter(filterFunction)
             .filter((tool) => tool.name !== recommendedName)
             .map((tool, i) => {
-              return <ToolCard key={i} tool={tool as any} />;
+              return <ToolCard key={i} tool={tool} />;
             })}
         </div>
       )}

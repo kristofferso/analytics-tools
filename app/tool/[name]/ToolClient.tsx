@@ -8,24 +8,7 @@ import Button from "../../../components/elements/Button";
 import Header from "../../../components/Header";
 import NewsletterSignup from "../../../components/NewsletterSignup";
 import { Check, ExternalLink, Shield, Code, Cookie, Server, Cloud, Zap, DollarSign, Eye } from "lucide-react";
-
-interface Tool {
-  name: string;
-  type: string;
-  color_tint: string;
-  logo_url: string;
-  privacy_friendly: boolean;
-  open_source: boolean;
-  cookie_based: boolean;
-  features?: string;
-  analysis_level: string;
-  hosting: string;
-  screenshot_url?: string;
-  demo_link?: string;
-  pricing_tier_dims: string;
-  price_starting: number;
-  url: string;
-}
+import type { Tool } from "../../../types/tool";
 
 interface ToolClientProps {
   tool: Tool;

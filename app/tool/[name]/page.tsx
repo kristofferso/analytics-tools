@@ -1,39 +1,10 @@
-import TextLink from "../../../components/elements/TextLink";
-import { supabase } from "../../../utils/supabase";
-import { capitalize } from "../../../utils/capitalize";
-import Image from "next/image";
-import Button from "../../../components/elements/Button";
-import Header from "../../../components/Header";
 import ToolClient from "./ToolClient";
 import { Metadata } from "next";
-
-async function getTool(name: string) {
-  const upperName = name
-    .split("-")
-    .map((word) => word[0].toUpperCase() + word.substring(1))
-    .join(" ");
-  const { data: tool } = await supabase
-    .from("tools")
-    .select("*")
-    .ilike("name", upperName)
-    .single();
-
-  return tool;
-}
+import { getToolBySlug, getAllToolSlugs } from "../../../data/toolsData";
 
 export async function generateStaticParams() {
-  const { data: tools } = await supabase
-    .from("tools")
-    .select("name")
-    .order("name", { ascending: true });
-
-  return (tools || []).map((tool) => ({
-    name: tool.name.toLowerCase().replace(/\s/g, "-"),
-  }));
+  return getAllToolSlugs().map((name) => ({ name }));
 }
-
-// Cache tool pages for 1 hour (3600 seconds)
-export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -41,7 +12,7 @@ export async function generateMetadata({
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-  const tool = await getTool(name);
+  const tool = getToolBySlug(name);
 
   if (!tool) {
     return {
@@ -110,7 +81,7 @@ export default async function ToolPage({
   params: Promise<{ name: string }>;
 }) {
   const { name } = await params;
-  const tool = await getTool(name);
+  const tool = getToolBySlug(name);
 
   if (!tool) {
     return null;

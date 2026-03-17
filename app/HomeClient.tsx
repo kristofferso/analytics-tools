@@ -6,21 +6,7 @@ import Header from "../components/Header";
 import FilterSection from "../components/FilterSection";
 import { reduceDimension } from "../utils/reduceDimension";
 import Link from "next/link";
-
-interface Tool {
-  name: string;
-  type: string;
-  features?: string;
-  cookie_based: boolean;
-  privacy_friendly: boolean;
-  open_source: boolean;
-  hosting: string;
-  analysis_level: string;
-  price_starting: number;
-  color_tint: string;
-  logo_url: string;
-  url: string;
-}
+import type { Tool } from "../types/tool";
 
 interface HomeClientProps {
   tools: Tool[];
