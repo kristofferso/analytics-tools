@@ -1,14 +1,30 @@
 import { MetadataRoute } from "next";
-import { getAllToolSlugs } from "../data/toolsData";
+import { getAllToolSlugs, getAllCompareSlugs } from "../data/toolsData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://analytics.rip";
 
-  const toolUrls = getAllToolSlugs().map((slug) => ({
+  const slugs = getAllToolSlugs();
+
+  const toolUrls = slugs.map((slug) => ({
     url: `${baseUrl}/tool/${slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.8,
+  }));
+
+  const alternativesUrls = slugs.map((slug) => ({
+    url: `${baseUrl}/alternatives/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  const compareUrls = getAllCompareSlugs().map((slug) => ({
+    url: `${baseUrl}/compare/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
   }));
 
   return [
@@ -37,6 +53,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     ...toolUrls,
+    ...alternativesUrls,
+    ...compareUrls,
   ];
 }
 

@@ -271,6 +271,16 @@ export default function ToolClient({ tool }: ToolClientProps) {
             </div>
           </div>
 
+          {/* Alternatives link */}
+          <div className="card bg-base-100 border border-base-300">
+            <div className="card-body py-4">
+              <p className="text-sm text-muted-foreground mb-2">Not the right fit?</p>
+              <TextLink href={`/alternatives/${tool.name.toLowerCase().replace(/\s/g, "-")}`} className="text-sm font-medium">
+                Find alternatives to {tool.name} →
+              </TextLink>
+            </div>
+          </div>
+
           {/* Additional Info */}
           <div className="card bg-base-100 shadow-lg border border-base-300">
             <div className="card-body">
