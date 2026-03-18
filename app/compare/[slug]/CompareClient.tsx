@@ -8,6 +8,7 @@ import TextLink from "../../../components/elements/TextLink";
 import NewsletterSignup from "../../../components/NewsletterSignup";
 import { capitalize } from "../../../utils/capitalize";
 import type { Tool } from "../../../types/tool";
+import type { CompareContent } from "../../../lib/compareContent";
 
 interface RelatedComparison {
   slug: string;
@@ -19,6 +20,7 @@ interface CompareClientProps {
   toolA: Tool;
   toolB: Tool;
   relatedComparisons: RelatedComparison[];
+  content: CompareContent;
 }
 
 const BoolCell = ({ value }: { value: boolean }) =>
@@ -42,6 +44,7 @@ export default function CompareClient({
   toolA,
   toolB,
   relatedComparisons,
+  content,
 }: CompareClientProps) {
   const slugA = toSlug(toolA.name);
   const slugB = toSlug(toolB.name);
@@ -164,6 +167,11 @@ export default function CompareClient({
         </p>
       </div>
 
+      {/* Intro */}
+      <p className="text-muted-foreground max-w-2xl mb-10 text-base leading-relaxed">
+        {content.intro}
+      </p>
+
       {/* Comparison table */}
       <div className="card bg-base-100 shadow-lg border border-base-300 mb-8">
         <div className="card-body p-0 overflow-x-auto">
@@ -272,6 +280,57 @@ export default function CompareClient({
           </div>
         </div>
       )}
+
+      {/* Which should you choose? */}
+      <div className="mb-10">
+        <h2 className="text-2xl font-bold mb-6">
+          Which should you choose?
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="card bg-base-100 border border-base-300 shadow-sm">
+            <div className="card-body">
+              <h3 className="font-semibold text-base mb-3">
+                Choose {toolA.name} if…
+              </h3>
+              <ul className="space-y-2">
+                {content.chooseA.map((reason, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    {reason}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="card bg-base-100 border border-base-300 shadow-sm">
+            <div className="card-body">
+              <h3 className="font-semibold text-base mb-3">
+                Choose {toolB.name} if…
+              </h3>
+              <ul className="space-y-2">
+                {content.chooseB.map((reason, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                    {reason}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Verdict */}
+        <div className="card bg-primary/5 border border-primary/20">
+          <div className="card-body py-5">
+            <p className="text-sm font-semibold uppercase tracking-wide text-primary mb-1">
+              Verdict
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {content.verdict}
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* CTAs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">

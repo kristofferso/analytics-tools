@@ -22,7 +22,7 @@ export async function generateMetadata({
     return { title: "Tool Not Found" };
   }
 
-  const title = `Best ${tool.name} Alternatives in 2025`;
+  const title = `Best ${tool.name} Alternatives in ${new Date().getFullYear()}`;
   const description = `Looking for ${tool.name} alternatives? Compare the best ${tool.type} tools — including privacy-friendly, open source, and free options.`;
 
   return {

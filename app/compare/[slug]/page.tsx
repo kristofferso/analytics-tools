@@ -3,10 +3,10 @@ import { notFound } from "next/navigation";
 import {
   parseCompareSlug,
   getAllCompareSlugs,
-  getAllToolSlugs,
-  getToolBySlug,
+  getAllTools,
 } from "../../../data/toolsData";
 import CompareClient from "./CompareClient";
+import { generateCompareContent } from "../../../lib/compareContent";
 
 export function generateStaticParams() {
   return getAllCompareSlugs().map((slug) => ({ slug }));
@@ -78,21 +78,40 @@ export default async function ComparePage({
   const slugA = toolA.name.toLowerCase().replace(/\s/g, "-");
   const slugB = toolB.name.toLowerCase().replace(/\s/g, "-");
 
-  // Pick up to 4 related comparisons: other tools vs toolA and toolB
-  const allSlugs = getAllToolSlugs().filter(
-    (s) => s !== slugA && s !== slugB
+  // Related comparisons: prefer tools of the same type, then fill with others
+  const otherTools = getAllTools().filter(
+    (t) => {
+      const s = t.name.toLowerCase().replace(/\s/g, "-");
+      return s !== slugA && s !== slugB;
+    }
   );
-  const relatedComparisons = allSlugs.slice(0, 4).flatMap((s) => {
-    const other = getToolBySlug(s);
-    if (!other) return [];
-    // canonical ordering: alphabetically smaller slug goes first
-    const pairA = [slugA, s].sort();
-    const pairB = [slugB, s].sort();
-    return [
-      { slug: `${pairA[0]}-vs-${pairA[1]}`, nameA: pairA[0] === slugA ? toolA.name : other.name, nameB: pairA[0] === slugA ? other.name : toolA.name },
-      { slug: `${pairB[0]}-vs-${pairB[1]}`, nameA: pairB[0] === slugB ? toolB.name : other.name, nameB: pairB[0] === slugB ? other.name : toolB.name },
-    ];
-  }).slice(0, 6);
+  // Sort: same-type tools first (type shared by either toolA or toolB)
+  const sameType = otherTools.filter(
+    (t) => t.type === toolA.type || t.type === toolB.type
+  );
+  const differentType = otherTools.filter(
+    (t) => t.type !== toolA.type && t.type !== toolB.type
+  );
+  const sortedOthers = [...sameType, ...differentType];
+
+  const seen = new Set<string>();
+  const relatedComparisons: { slug: string; nameA: string; nameB: string }[] = [];
+  for (const other of sortedOthers) {
+    if (relatedComparisons.length >= 6) break;
+    const s = other.name.toLowerCase().replace(/\s/g, "-");
+    for (const [base, baseName] of [[slugA, toolA.name], [slugB, toolB.name]] as [string, string][]) {
+      if (relatedComparisons.length >= 6) break;
+      const pairSlugs = [base, s].sort();
+      const pairSlug = `${pairSlugs[0]}-vs-${pairSlugs[1]}`;
+      if (seen.has(pairSlug)) continue;
+      seen.add(pairSlug);
+      const nameA = pairSlugs[0] === base ? baseName : other.name;
+      const nameB = pairSlugs[0] === base ? other.name : baseName;
+      relatedComparisons.push({ slug: pairSlug, nameA, nameB });
+    }
+  }
+
+  const content = generateCompareContent(toolA, toolB);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -112,6 +131,7 @@ export default async function ComparePage({
         toolA={toolA}
         toolB={toolB}
         relatedComparisons={relatedComparisons}
+        content={content}
       />
     </>
   );
